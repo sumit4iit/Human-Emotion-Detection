@@ -2,12 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package human.emotion.detection.ImageProcessing;
+package humanEmotionDetection.ImageProcessing;
 
 /**
  *
  * @author OI
  */
-public class BiggestObject {
+public class Morphological {
     
 }
