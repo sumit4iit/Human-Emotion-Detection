@@ -10,7 +10,19 @@ import java.awt.image.BufferedImage;
  *
  * @author OI
  */
-public class SegmentationSkin extends ImageProcessing{
+public class SegmentationSkin extends ImageProcessing {
+
+    private double R;
+    private double G;
+    private double B;
+    private double Y;
+    private double CB;
+    private double CR;
+    private BufferedImage image;
+
+    public SegmentationSkin(ImageProcessing image) {
+        this.image = image.getImage();
+    }
 
     @Override
     public BufferedImage cloneImage() {
@@ -26,5 +38,4 @@ public class SegmentationSkin extends ImageProcessing{
     public void setImage(BufferedImage image) {
         super.setImage(image);
     }
-    
 }

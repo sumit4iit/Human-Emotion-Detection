@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
  *
  * @author OI
  */
-public class BiggestObject extends ImageProcessing {
+public class TracingBoundary extends ImageProcessing {
 
     @Override
     public BufferedImage cloneImage() {
