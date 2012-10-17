@@ -52,17 +52,16 @@ public class SegmentationSkin extends ImageProcessing {
     }
 
     @Override
-    public BufferedImage cloneImage() {
+    public ImageProcessing cloneImage() {
         return super.cloneImage();
     }
+
+   
 
     @Override
     public BufferedImage getImage() {
         return super.getImage();
     }
 
-    @Override
-    public void setImage(BufferedImage image) {
-        super.setImage(image);
-    }
+    
 }

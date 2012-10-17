@@ -35,8 +35,8 @@ public class ImageProcessing {
         }
     }
 
-    public BufferedImage cloneImage() {
-        return this.cloneImage();
+    public ImageProcessing cloneImage() {
+        return this;
     }
 
     public void setImage(BufferedImage image) {
