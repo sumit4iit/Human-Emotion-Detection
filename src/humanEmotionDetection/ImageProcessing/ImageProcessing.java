@@ -4,9 +4,12 @@
  */
 package humanEmotionDetection.ImageProcessing;
 
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 /**
@@ -19,7 +22,7 @@ public class ImageProcessing {
     private File file;
 
     public BufferedImage getImage() {
-        return image;
+        return this.image;
     }
 
     public ImageProcessing() {
@@ -35,11 +38,21 @@ public class ImageProcessing {
         }
     }
 
-    public ImageProcessing cloneImage() {
-        return this;
+    protected Object cloneImage() throws CloneNotSupportedException {
+        return this.clone();
     }
 
-    public void setImage(BufferedImage image) {
+    protected void setImage(BufferedImage image) {
         this.image = image;
+    }
+
+    public void writeImage(BufferedImage Image, String path, String nameImage) {
+        try {
+
+            ImageIO.write(Image, "png", new File(path + nameImage));
+        } catch (IOException ex) {
+            Logger.getLogger(Image.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 }

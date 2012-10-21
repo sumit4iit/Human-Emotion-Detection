@@ -12,12 +12,7 @@ import java.awt.image.BufferedImage;
  */
 public class TracingBoundary extends ImageProcessing {
 
-    @Override
-    public ImageProcessing cloneImage() {
-        return super.cloneImage();
-    }
-
-   
+      
 
     @Override
     public BufferedImage getImage() {
