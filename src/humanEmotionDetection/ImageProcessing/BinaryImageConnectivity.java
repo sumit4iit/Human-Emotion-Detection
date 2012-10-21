@@ -48,7 +48,7 @@ public class BinaryImageConnectivity {
         return connectivity;
     }
 
-    public int[][] getNeighbourHood(BufferedImage image, int x, int y,int RGB) {
+    public int[][] getNeighbourHood(BufferedImage image, int x, int y, int RGB) {
         BufferedImage images = image;
         int width = images.getWidth();
         int height = images.getHeight();
@@ -64,6 +64,133 @@ public class BinaryImageConnectivity {
         neighbourHood[2][2] = ((y + 1 >= 0 && y + 1 < width) && (x + 1 >= 0 && x + 1 < height)) ? images.getRGB(x + 1, y + 1) : RGB;
 
         return neighbourHood;
+    }
+
+    public int[] neighBourHood(int toDir, int x, int y, int width, int height) {
+        int[] pixel = new int[2];
+        pixel[0] = -1;
+        pixel[1] = -1;
+        if (x < width && y < height && x >= 0 && y >= 0) {
+            if (toDir == 0) {
+                if ((x + 1 < width)) {
+                    pixel[0] = x + 1;
+                    pixel[1] = y;
+                }
+            } else if (toDir == 1) {
+                if ((y - 1 >= 0) && (x + 1 < width)) {
+                    pixel[0] = x + 1;
+                    pixel[1] = y - 1;
+                }
+            } else if (toDir == 2) {
+                if ((y - 1 >= 0)) {
+                    pixel[0] = x;
+                    pixel[1] = y - 1;
+                }
+            } else if (toDir == 3) {
+                if ((y - 1 >= 0) && (x - 1 >= 0)) {
+                    pixel[0] = x - 1;
+                    pixel[1] = y - 1;
+                }
+            } else if (toDir == 4) {
+                if ((x - 1 >= 0)) {
+                    pixel[0] = x - 1;
+                    pixel[1] = y;
+                }
+            } else if (toDir == 5) {
+                if ((y + 1 < height) && (x - 1 >= 0)) {
+                    pixel[0] = x - 1;
+                    pixel[1] = y + 1;
+                }
+            } else if (toDir == 6) {
+                if ((y + 1 < height)) {
+                    pixel[0] = x;
+                    pixel[1] = y + 1;
+                }
+            } else if (toDir == 7) {
+                if ((y + 1 < height) && (x + 1 < height)) {
+                    pixel[0] = x + 1;
+                    pixel[1] = y + 1;
+                }
+            }
+        }
+
+
+        return pixel;
+    }
+    public boolean cekNeighBourHood(int x, int y, int width, int height) {
+        int[] pixel = new int[2];
+        boolean result = false;
+        pixel[0] = -1;
+        pixel[1] = -1;
+        if (x < width && y < height && x >= 0 && y >= 0) {
+
+            if ((x + 1 < width)) {
+                pixel[0] = x + 1;
+                pixel[1] = y;
+                if (BinaryImage.isBlue(this.image.getRGB(pixel[0], pixel[1]))) {
+                    result = true;
+                }
+            }
+
+            if ((y - 1 >= 0) && (x + 1 < width)) {
+                pixel[0] = x + 1;
+                pixel[1] = y - 1;
+                if (BinaryImage.isBlue(this.image.getRGB(pixel[0], pixel[1]))) {
+                    result = true;
+                }
+            }
+
+            if ((y - 1 >= 0)) {
+                pixel[0] = x;
+                pixel[1] = y - 1;
+                if (BinaryImage.isBlue(this.image.getRGB(pixel[0], pixel[1]))) {
+                    result = true;
+                }
+            }
+
+            if ((y - 1 >= 0) && (x - 1 >= 0)) {
+                pixel[0] = x - 1;
+                pixel[1] = y - 1;
+                if (BinaryImage.isBlue(this.image.getRGB(pixel[0], pixel[1]))) {
+                    result = true;
+                }
+            }
+
+            if ((x - 1 >= 0)) {
+                pixel[0] = x - 1;
+                pixel[1] = y;
+                if (BinaryImage.isBlue(this.image.getRGB(pixel[0], pixel[1]))) {
+                    result = true;
+                }
+            }
+
+            if ((y + 1 < height) && (x - 1 >= 0)) {
+                pixel[0] = x - 1;
+                pixel[1] = y + 1;
+                if (BinaryImage.isBlue(this.image.getRGB(pixel[0], pixel[1]))) {
+                    result = true;
+                }
+            }
+
+            if ((y + 1 < height)) {
+                pixel[0] = x;
+                pixel[1] = y + 1;
+                if (BinaryImage.isBlue(this.image.getRGB(pixel[0], pixel[1]))) {
+                    result = true;
+                }
+            }
+
+            if ((y + 1 < height) && (x + 1 < height)) {
+                pixel[0] = x + 1;
+                pixel[1] = y + 1;
+                if (BinaryImage.isBlue(this.image.getRGB(pixel[0], pixel[1]))) {
+                    result = true;
+                }
+            }
+
+        }
+        return result;
+
     }
 
     public int convert(int value, int colorOpponent, int color) {

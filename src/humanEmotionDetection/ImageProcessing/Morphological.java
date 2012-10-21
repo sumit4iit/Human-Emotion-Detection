@@ -21,8 +21,8 @@ public class Morphological extends ImageProcessing {
     private BufferedImage image;
     private BufferedImage image2;
 
-    public Morphological(BufferedImage image) {
-        this.image = image;
+    public Morphological(ImageProcessing image) {
+        this.image = image.getImage();
 
 
     }
