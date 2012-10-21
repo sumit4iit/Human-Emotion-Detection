@@ -25,10 +25,5 @@ public class BinaryImage {
         }
         return false;
     }
-    public static boolean isBlue(int RGB){
-        if(RGB == Color.BLUE.getRGB()){
-            return true;
-        }
-        return false;
-    }
+    
 }

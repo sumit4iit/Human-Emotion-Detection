@@ -127,7 +127,7 @@ public class BinaryImageConnectivity {
             if ((x + 1 < width)) {
                 pixel[0] = x + 1;
                 pixel[1] = y;
-                if (BinaryImage.isBlue(this.image.getRGB(pixel[0], pixel[1]))) {
+                if (ColorImage.isBlue(this.image.getRGB(pixel[0], pixel[1]))) {
                     result = true;
                 }
             }
@@ -135,7 +135,7 @@ public class BinaryImageConnectivity {
             if ((y - 1 >= 0) && (x + 1 < width)) {
                 pixel[0] = x + 1;
                 pixel[1] = y - 1;
-                if (BinaryImage.isBlue(this.image.getRGB(pixel[0], pixel[1]))) {
+                if (ColorImage.isBlue(this.image.getRGB(pixel[0], pixel[1]))) {
                     result = true;
                 }
             }
@@ -143,7 +143,7 @@ public class BinaryImageConnectivity {
             if ((y - 1 >= 0)) {
                 pixel[0] = x;
                 pixel[1] = y - 1;
-                if (BinaryImage.isBlue(this.image.getRGB(pixel[0], pixel[1]))) {
+                if (ColorImage.isBlue(this.image.getRGB(pixel[0], pixel[1]))) {
                     result = true;
                 }
             }
@@ -151,7 +151,7 @@ public class BinaryImageConnectivity {
             if ((y - 1 >= 0) && (x - 1 >= 0)) {
                 pixel[0] = x - 1;
                 pixel[1] = y - 1;
-                if (BinaryImage.isBlue(this.image.getRGB(pixel[0], pixel[1]))) {
+                if (ColorImage.isBlue(this.image.getRGB(pixel[0], pixel[1]))) {
                     result = true;
                 }
             }
@@ -159,7 +159,7 @@ public class BinaryImageConnectivity {
             if ((x - 1 >= 0)) {
                 pixel[0] = x - 1;
                 pixel[1] = y;
-                if (BinaryImage.isBlue(this.image.getRGB(pixel[0], pixel[1]))) {
+                if (ColorImage.isBlue(this.image.getRGB(pixel[0], pixel[1]))) {
                     result = true;
                 }
             }
@@ -167,7 +167,7 @@ public class BinaryImageConnectivity {
             if ((y + 1 < height) && (x - 1 >= 0)) {
                 pixel[0] = x - 1;
                 pixel[1] = y + 1;
-                if (BinaryImage.isBlue(this.image.getRGB(pixel[0], pixel[1]))) {
+                if (ColorImage.isBlue(this.image.getRGB(pixel[0], pixel[1]))) {
                     result = true;
                 }
             }
@@ -175,7 +175,7 @@ public class BinaryImageConnectivity {
             if ((y + 1 < height)) {
                 pixel[0] = x;
                 pixel[1] = y + 1;
-                if (BinaryImage.isBlue(this.image.getRGB(pixel[0], pixel[1]))) {
+                if (ColorImage.isBlue(this.image.getRGB(pixel[0], pixel[1]))) {
                     result = true;
                 }
             }
@@ -183,7 +183,7 @@ public class BinaryImageConnectivity {
             if ((y + 1 < height) && (x + 1 < height)) {
                 pixel[0] = x + 1;
                 pixel[1] = y + 1;
-                if (BinaryImage.isBlue(this.image.getRGB(pixel[0], pixel[1]))) {
+                if (ColorImage.isBlue(this.image.getRGB(pixel[0], pixel[1]))) {
                     result = true;
                 }
             }
