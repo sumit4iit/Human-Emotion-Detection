@@ -6,6 +6,8 @@ package humanEmotionDetection.ImageProcessing;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -33,26 +35,33 @@ public class ImageProcessing {
         try {
             this.image = ImageIO.read(file);
         } catch (IOException e) {
-            System.err.println(e);
+            Logger.getLogger(Image.class.getName()).log(Level.SEVERE, null, e);
 
         }
     }
 
-    protected Object cloneImage() throws CloneNotSupportedException {
-        return this.clone();
-    }
-
-    protected void setImage(BufferedImage image) {
+    public void setImage(BufferedImage image) {
         this.image = image;
     }
 
-    public void writeImage(BufferedImage Image, String path, String nameImage) {
+    public void setImage(ImageProcessing image) {
+        this.image = image.getImage();
+    }
+
+    public void writeImage(String path, String nameImage) {
         try {
 
-            ImageIO.write(Image, "png", new File(path + nameImage));
+            ImageIO.write(this.image, "png", new File(path + "\\" + nameImage));
         } catch (IOException ex) {
             Logger.getLogger(Image.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    public static BufferedImage deepCopy(BufferedImage image) {
+        ColorModel cm = image.getColorModel();
+        boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
+        WritableRaster raster = image.copyData(null);
+        return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
     }
 }

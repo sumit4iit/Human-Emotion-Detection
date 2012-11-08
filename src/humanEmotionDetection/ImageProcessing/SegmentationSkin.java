@@ -37,9 +37,9 @@ public class SegmentationSkin extends ImageProcessing {
         int pixels;
         width = this.image.getWidth();
         height = this.image.getHeight();
-        for (int i = 0; i < height; i++) {
-            for (int h = 0; h < width; h++) {
-                pixels = this.image.getRGB(h, i);
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                pixels = this.image.getRGB(x, y);
                 R = (pixels >> 16) & 0xff;
                 G = (pixels >> 8) & 0xff;
                 B = (pixels) & 0xff;
@@ -47,13 +47,19 @@ public class SegmentationSkin extends ImageProcessing {
                 CB = (int) ((-0.168935 * R) + (-0.331665 * G) + (0.50059 * B));
                 CR = (int) ((0.499813 * R) + (-0.418531 * G) + (-0.081282 * B));
                 if ((Y > 120 && Y < 250) && (CB > -33.744 && CB < 8) && (CR > 3 && CR < 33)) {
-                    this.image.setRGB(i, h, Color.WHITE.getRGB());
+                    this.image.setRGB(x, y, Color.WHITE.getRGB());
 
                 } else {
-                    this.image.setRGB(i, h, Color.BLACK.getRGB());
+                    this.image.setRGB(x, y, Color.BLACK.getRGB());
                 }
             }
         }
+    }
+
+    @Override
+    public void writeImage(String path, String nameImage) {
+        super.setImage(this.image);
+        super.writeImage(path, nameImage);
     }
 
    
