@@ -156,7 +156,7 @@ public class TracingBoundary extends ImageProcessing {
                             currentPixel = this.image.getRGB(toPixel[0], toPixel[1]);
                         } else {
                             currentPixel = this.image.getRGB(x + 1, y + 1);
-                            System.out.print("CEK");
+                            //System.out.print("CEK");
                             //break;
                         }
                         while (!BinaryImage.isWhite(currentPixel)) {
@@ -222,7 +222,7 @@ public class TracingBoundary extends ImageProcessing {
         int curP;
         boolean search;
         this.west -= 5;
-        System.out.println("North" + this.north + "South" + this.south + "East" + this.east + "West" + this.west);
+        //System.out.println("North" + this.north + "South" + this.south + "East" + this.east + "West" + this.west);
         for (int y = this.north; y < this.south; y++) {
             for (int x = this.east; x < this.west; x++) {
                 xPixel = this.image2.getRGB(x, y);
@@ -234,8 +234,8 @@ public class TracingBoundary extends ImageProcessing {
                     search = true;
                     set = new ArrayList();
                     set.add(x + "," + y);
-                    System.out.println("xx");
-                    System.out.println(set.get(0));
+                    //System.out.println("xx");
+                    //System.out.println(set.get(0));
                     dir = 7;
                     while (search) {
                         if (dir % 2 == 0) {

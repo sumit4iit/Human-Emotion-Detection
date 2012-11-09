@@ -6,40 +6,48 @@ package humanEmotionDetection.ImageProcessing;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
  * @author OI
  */
-public class FeatureExtraction extends ImageProcessing {
+public class FeatureExtraction {
 
-    private int N;
-    private int S;
-    private int E;
-    private int W;
+    private double N;
+    private double S;
+    private double E;
+    private double W;
     private BufferedImage image;
     private List feature;
     private List<List> set;
 
     public FeatureExtraction(TracingBoundary traceResult) {
-        this.set = new ArrayList();
-        set = traceResult.getList();
+        this.set = traceResult.getList();
+        this.image = traceResult.getImage();
     }
 
     private void computeFeature() {
-        this.N = this.image.getHeight();
-        this.W = 0;
-        this.E = this.image.getWidth();
-        this.S = 0;
+
         String[] pixels;
-        int x;
-        int y;
-        int elongation;
-        int location;
-        int length;
+        double x;
+        double y;
+        double elongation;
+        double location;
+        double width;
+        double widthE;
+        double length;
+        double a;
+        double b;
+        Map<String, Double> aMap;
         this.feature = new ArrayList();
         for (int i = 0; i < this.set.size(); i++) {
+            this.N = this.image.getHeight();
+            this.W = 0;
+            this.E = this.image.getWidth();
+            this.S = 0;
             for (int h = 0; h < this.set.get(i).size(); h++) {
                 pixels = this.set.get(i).get(h).toString().split(",");
                 x = Integer.parseInt(pixels[0]);
@@ -57,24 +65,25 @@ public class FeatureExtraction extends ImageProcessing {
                     this.W = x;
                 }
             }
-            elongation = (this.S - this.N) / (this.W - this.E);
-            location = (this.image.getHeight() - this.N) / this.image.getHeight();
-            length = this.image.getHeight();
-            this.feature.add(elongation + "," + location + "," + length);
+            width = this.S - this.N;
+            length = this.W - this.E;
+            a = this.image.getHeight() - this.N;
+            b = this.image.getHeight();
+            widthE = this.image.getWidth();
+            //System.out.println(width + "," + length + "," + a + "," + b);
+            elongation = width/length;
+            location = a/b;
+            length = length/widthE;
+            aMap = new HashMap<String, Double>();
+            aMap.put("elongation", Double.valueOf(elongation));
+            aMap.put("location", Double.valueOf(location));
+            aMap.put("length", Double.valueOf(length));
+            this.feature.add(aMap);
         }
     }
 
-    public List<List> getFeature() {
+    public List getFeature() {
+        this.computeFeature();
         return feature;
-    }
-
-    @Override
-    public BufferedImage getImage() {
-        return super.getImage();
-    }
-
-    @Override
-    public void writeImage(String path, String nameImage) {
-        super.writeImage(path, nameImage);
     }
 }

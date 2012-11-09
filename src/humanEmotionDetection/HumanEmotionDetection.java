@@ -5,12 +5,11 @@
 package humanEmotionDetection;
 
 import humanEmotionDetection.ImageProcessing.*;
+import humanEmotionDetection.SoftComputing.MouthValidationNeuralNetwork;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-
-import java.util.List;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,10 +34,16 @@ public class HumanEmotionDetection {
         File file = new File(pathFile + imageOrigin);
         File path = new File(pathFile);
         ImageProcessing image;
+        Iterator candidatMouths;
+        HashMap candidatMouth;
+        double[] inputNetwork = new double[3];
 
         SegmentationSkin segment;
         Morphological morphologicalOperator;
         TracingBoundary boundary;
+        FeatureExtraction feature;
+        MouthValidationNeuralNetwork mouthValidationNeuralNetwork;
+
 
         URL url = null;
         URL pathImage = null;
@@ -81,6 +86,19 @@ public class HumanEmotionDetection {
         boundary.writeImage(imagePathSave, imageBiggestObject);
         boundary.determineHole();
         boundary.writeImageHole(imagePathSave, imageHoles);
+
+        feature = new FeatureExtraction(boundary);
+        candidatMouths = feature.getFeature().iterator();
+        while (candidatMouths.hasNext()) {
+            candidatMouth = (HashMap) candidatMouths.next();
+            inputNetwork[0] = (double) candidatMouth.get("elongation");
+            inputNetwork[1] = (double) candidatMouth.get("location");
+            inputNetwork[2] = (double) candidatMouth.get("length");
+  
+            mouthValidationNeuralNetwork = new MouthValidationNeuralNetwork(inputNetwork);
+            mouthValidationNeuralNetwork.recognition();
+            System.out.println("Output"+mouthValidationNeuralNetwork.getOutput());
+        }
 
 
 
