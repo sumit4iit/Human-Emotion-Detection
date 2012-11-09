@@ -221,7 +221,7 @@ public class TracingBoundary extends ImageProcessing {
         int nextPixel;
         int curP;
         boolean search;
-       this.west-=5;
+        this.west -= 5;
         System.out.println("North" + this.north + "South" + this.south + "East" + this.east + "West" + this.west);
         for (int y = this.north; y < this.south; y++) {
             for (int x = this.east; x < this.west; x++) {
@@ -249,19 +249,19 @@ public class TracingBoundary extends ImageProcessing {
                             currentPixel = this.image3.getRGB(toPixel[0], toPixel[1]);
                         } else {
                             currentPixel = this.image3.getRGB(x + 1, y + 1);
-                   
-                           
-                            
+
+
+
                             break;
                         }
                         while (!BinaryImage.isBlack(currentPixel)) {
-                           // System.out.println("CEK2");
+                            // System.out.println("CEK2");
                             toDir++;
                             if (toDir > 7) {
                                 toDir = 0;
                             }
                             toPixel = this.binaryImageConnectivity.neighBourHood(toDir, x, y, this.west, this.south);
-                           // System.out.println("AWW" + this.south + "," + y + this.west + "," + x + "todir=" + toDir);
+                            // System.out.println("AWW" + this.south + "," + y + this.west + "," + x + "todir=" + toDir);
                             currentPixel = this.image3.getRGB(toPixel[0], toPixel[1]);
 
                         }
@@ -280,8 +280,8 @@ public class TracingBoundary extends ImageProcessing {
                             if ((set.get(curP).equals(set.get(1))) && (set.get(curP - 1).equals(set.get(0)))) {
 
 
-                          
-                                
+
+
                                 search = false;
                                 list.add(set);
 
@@ -404,5 +404,9 @@ public class TracingBoundary extends ImageProcessing {
     public void writeImageHole(String path, String nameImage) {
         super.setImage(this.image4);
         super.writeImage(path, nameImage);
+    }
+
+    public List<List> getList() {
+        return list;
     }
 }
