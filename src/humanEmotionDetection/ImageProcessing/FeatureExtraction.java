@@ -29,6 +29,55 @@ public class FeatureExtraction {
         this.image = traceResult.getImage();
     }
 
+    public FeatureExtraction(ImageProcessing image) {
+        this.image = image.getImage();
+    }
+
+    public void getDirection(List boundary) {
+        String[] pixels;
+        double x;
+        double y;
+        Map<String, Double> aMap;
+        this.N = this.image.getHeight();
+        this.W = 0;
+        this.E = this.image.getWidth();
+        this.S = 0;
+        for (int h = 0; h < boundary.size(); h++) {
+            pixels = boundary.get(h).toString().split(",");
+            x = Integer.parseInt(pixels[0]);
+            y = Integer.parseInt(pixels[1]);
+            if (y < this.N) {
+                this.N = y;
+            }
+            if (y > this.S) {
+                this.S = y;
+            }
+            if (x < this.E) {
+                this.E = x;
+            }
+            if (x > this.W) {
+                this.W = x;
+            }
+        }
+
+    }
+
+    public double getE() {
+        return E;
+    }
+
+    public double getN() {
+        return N;
+    }
+
+    public double getS() {
+        return S;
+    }
+
+    public double getW() {
+        return W;
+    }
+
     private void computeFeature() {
 
         String[] pixels;
@@ -71,9 +120,9 @@ public class FeatureExtraction {
             b = this.image.getHeight();
             widthE = this.image.getWidth();
             //System.out.println(width + "," + length + "," + a + "," + b);
-            elongation = width/length;
-            location = a/b;
-            length = length/widthE;
+            elongation = width / length;
+            location = a / b;
+            length = length / widthE;
             aMap = new HashMap<String, Double>();
             aMap.put("elongation", Double.valueOf(elongation));
             aMap.put("location", Double.valueOf(location));

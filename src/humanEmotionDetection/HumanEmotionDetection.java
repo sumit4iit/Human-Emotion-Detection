@@ -6,6 +6,7 @@ package humanEmotionDetection;
 
 import humanEmotionDetection.ImageProcessing.*;
 import humanEmotionDetection.SoftComputing.MouthValidationNeuralNetwork;
+import java.awt.Color;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -24,25 +25,25 @@ public class HumanEmotionDetection {
      */
     public static void main(String[] args) {
         String pathFile = "src/humanEmotionDetection/image/";
-        String imageOrigin = "test13.jpg";
-        String imageSegment = "test13_01_seg.png";
-        String imageDilation = "test13_02_dil.png ";
-        String imageErotion = "test13_03_er.png";
-        String imageBiggestObject = "test13_04_biggest.png";
-        String imageHoles = "test13_05_holes.png";
-        String imageMarking = "test13_06_mark.png";
+        String imageOrigin = "test12.jpg";
+        String imageSegment = "test12_01_seg.png";
+        String imageDilation = "test12_02_dil.png ";
+        String imageErotion = "test12_03_er.png";
+        String imageBiggestObject = "test12_04_biggest.png";
+        String imageHoles = "test12_05_holes.png";
+        String imageMarking = "test12_06_mark.png";
         File file = new File(pathFile + imageOrigin);
         File path = new File(pathFile);
         ImageProcessing image;
-        Iterator candidatMouths;
-        HashMap candidatMouth;
-        double[] inputNetwork = new double[3];
+        ImageProcessing image2;
+
 
         SegmentationSkin segment;
         Morphological morphologicalOperator;
         TracingBoundary boundary;
-        FeatureExtraction feature;
-        MouthValidationNeuralNetwork mouthValidationNeuralNetwork;
+        MouthValidation mouthValidation;
+        MarkImage mark;
+
 
 
         URL url = null;
@@ -62,6 +63,7 @@ public class HumanEmotionDetection {
 
         //segmentation skin
         image = new ImageProcessing(imagePath);
+        image2 = new ImageProcessing(imagePath);
         segment = new SegmentationSkin(image);
         segment.segmentate();
         segment.writeImage(imagePathSave, imageSegment);
@@ -87,19 +89,13 @@ public class HumanEmotionDetection {
         boundary.determineHole();
         boundary.writeImageHole(imagePathSave, imageHoles);
 
-        feature = new FeatureExtraction(boundary);
-        candidatMouths = feature.getFeature().iterator();
-        while (candidatMouths.hasNext()) {
-            candidatMouth = (HashMap) candidatMouths.next();
-            inputNetwork[0] = (double) candidatMouth.get("elongation");
-            inputNetwork[1] = (double) candidatMouth.get("location");
-            inputNetwork[2] = (double) candidatMouth.get("length");
-  
-            mouthValidationNeuralNetwork = new MouthValidationNeuralNetwork(inputNetwork);
-            mouthValidationNeuralNetwork.recognition();
-            System.out.println("Output"+mouthValidationNeuralNetwork.getOutput());
-        }
 
+        mouthValidation = new MouthValidation(image2, boundary);
+        mouthValidation.evaluate();
+
+        mark = new MarkImage(image2, Color.orange.getRGB());
+        mark.marking(mouthValidation.getDirection());
+        mark.writeImage(imagePathSave, imageMarking);
 
 
         //marking
