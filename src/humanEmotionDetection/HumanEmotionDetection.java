@@ -25,13 +25,15 @@ public class HumanEmotionDetection {
      */
     public static void main(String[] args) {
         String pathFile = "src/humanEmotionDetection/image/";
-        String imageOrigin = "test12.jpg";
-        String imageSegment = "test12_01_seg.png";
-        String imageDilation = "test12_02_dil.png ";
-        String imageErotion = "test12_03_er.png";
-        String imageBiggestObject = "test12_04_biggest.png";
-        String imageHoles = "test12_05_holes.png";
-        String imageMarking = "test12_06_mark.png";
+        String imageOrigin = "test2.jpg";
+        String imageSegment = "test2_01_seg.png";
+        String imageDilation = "test2_02_dil.png ";
+        String imageErotion = "test2_03_er.png";
+        String imageBiggestObject = "test2_04_biggest.png";
+        String imageHoles = "test2_05_holes.png";
+        String imageMarking = "test2_06_mark.png";
+        String imageMouth = "test2_06_mouth.png";
+         String imageMouth2 = "test2_06_mouth2.png";
         File file = new File(pathFile + imageOrigin);
         File path = new File(pathFile);
         ImageProcessing image;
@@ -43,6 +45,7 @@ public class HumanEmotionDetection {
         TracingBoundary boundary;
         MouthValidation mouthValidation;
         MarkImage mark;
+        CropImage crop;
 
 
 
@@ -92,6 +95,13 @@ public class HumanEmotionDetection {
 
         mouthValidation = new MouthValidation(image2, boundary);
         mouthValidation.evaluate();
+
+
+        //crop mouth
+        crop = new CropImage(image, mouthValidation.getDirection());
+        crop.writeImage(imagePathSave, imageMouth);
+        crop = new CropImage(image2, mouthValidation.getDirection());
+        crop.writeImage(imagePathSave, imageMouth2);
 
         mark = new MarkImage(image2, Color.orange.getRGB());
         mark.marking(mouthValidation.getDirection());
