@@ -24,14 +24,14 @@ public class CropImage extends ImageProcessing {
     }
 
     private void crop() {
-        int N = (int) direction.get("N");
-        int S = (int) direction.get("S");
-        int E = (int) direction.get("E");
-        int W = (int) direction.get("W");
-        int x = E;
-        int y = N;
-        int w = W - E;
-        int h = S - N;
+        int Ny = (int) direction.get("Ny");
+        int Sy = (int) direction.get("Sy");
+        int Ex = (int) direction.get("Ex");
+        int Wx = (int) direction.get("Wx");
+        int x = Ex;
+        int y = Ny;
+        int w = Wx - Ex;
+        int h = Sy - Ny;
        // System.out.println(x+" "+y+" "+w+" "+h);
         this.imageCrop = this.image.getImage().getSubimage(x, y, w, h);
         super.setImage(this.imageCrop);

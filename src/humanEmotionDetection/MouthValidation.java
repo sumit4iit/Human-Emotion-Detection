@@ -46,7 +46,7 @@ public class MouthValidation {
             this.mouthValidationNeuralNetwork = new MouthValidationNeuralNetwork(inputNetwork);
             this.mouthValidationNeuralNetwork.recognition();
             System.out.println(this.mouthValidationNeuralNetwork.getOutput());
-            if (max < this.mouthValidationNeuralNetwork.getOutput() && this.mouthValidationNeuralNetwork.getOutput()>=0.9) {
+            if (max < this.mouthValidationNeuralNetwork.getOutput() && this.mouthValidationNeuralNetwork.getOutput() >= 0.9) {
                 max = this.mouthValidationNeuralNetwork.getOutput();
                 this.index = i;
             }
@@ -61,19 +61,36 @@ public class MouthValidation {
     public Map<String, Integer> getDirection() {
         Map<String, Integer> direction = new HashMap<String, Integer>();
         this.feature = new FeatureExtraction(this.image);
-        if(this.index == -1){
+        if (this.index == -1) {
             System.err.print("There isn't mouth");
             System.exit(0);
         }
         this.feature.getDirection(this.boundary.getList().get(this.index));
-        int N = (int) this.feature.getN();
-        int S = (int) this.feature.getS();
-        int E = (int) this.feature.getE();
-        int W = (int) this.feature.getW();
-        direction.put("N", Integer.valueOf(N));
-        direction.put("S", Integer.valueOf(S));
-        direction.put("E", Integer.valueOf(E));
-        direction.put("W", Integer.valueOf(W));
+        int Ny = (int) this.feature.getNy();
+        int Sy = (int) this.feature.getSy();
+        int Ex = (int) this.feature.getEx();
+        int Wx = (int) this.feature.getWx();
+
+        int Nx = (int) this.feature.getNx();
+        int Sx = (int) this.feature.getSx();
+        int Ey = (int) this.feature.getEy();
+        int Wy = (int) this.feature.getWy();
+
+        int widthImage = (int) this.feature.getWidthImage();
+        int heightImage = (int) this.feature.getHeightImage();
+
+        direction.put("Ny", Integer.valueOf(Ny));
+        direction.put("Sy", Integer.valueOf(Sy));
+        direction.put("Ex", Integer.valueOf(Ex));
+        direction.put("Wx", Integer.valueOf(Wx));
+
+        direction.put("Nx", Integer.valueOf(Nx));
+        direction.put("Sx", Integer.valueOf(Sx));
+        direction.put("Ey", Integer.valueOf(Ey));
+        direction.put("Wy", Integer.valueOf(Wy));
+
+        direction.put("widthImage", Integer.valueOf(widthImage));
+        direction.put("heightImage", Integer.valueOf(heightImage));
         return direction;
     }
 }

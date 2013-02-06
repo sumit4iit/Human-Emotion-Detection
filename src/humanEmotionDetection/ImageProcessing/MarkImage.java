@@ -36,17 +36,17 @@ public class MarkImage extends ImageProcessing {
     }
 
     public void marking(Map direction) {
-        int N = (int) direction.get("N");
-        int S = (int) direction.get("S");
-        int E = (int) direction.get("E");
-        int W = (int) direction.get("W");
-        for (int i = N; i < S; i++) {
-            this.image.setRGB(E, i, this.RGB);
-            this.image.setRGB(W, i, this.RGB);
+        int Ny = (int) direction.get("Ny");
+        int Sy = (int) direction.get("Sy");
+        int Ex = (int) direction.get("Ex");
+        int Wx = (int) direction.get("Wx");
+        for (int i = Ny; i < Sy; i++) {
+            this.image.setRGB(Ex, i, this.RGB);
+            this.image.setRGB(Wx, i, this.RGB);
         }
-        for (int i = E; i < W; i++) {
-            this.image.setRGB(i, N, this.RGB);
-            this.image.setRGB(i, S, this.RGB);
+        for (int i = Ex; i < Wx; i++) {
+            this.image.setRGB(i, Ny, this.RGB);
+            this.image.setRGB(i, Sy, this.RGB);
         }
 
     }
